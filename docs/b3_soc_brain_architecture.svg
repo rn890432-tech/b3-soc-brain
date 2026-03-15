@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  B3 SOC Brain – System Architecture Diagram
+  Shows the major services and their interactions.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+
+  <!-- Background -->
+  <rect width="960" height="640" fill="#0d1117" rx="12"/>
+
+  <!-- Title -->
+  <text x="480" y="38" text-anchor="middle" font-size="20" font-weight="bold" fill="#58a6ff">B3 SOC Brain – System Architecture</text>
+
+  <!-- ── Row 1: Ingestion Layer ── -->
+  <rect x="30" y="70" width="900" height="100" fill="#161b22" stroke="#30363d" stroke-width="1" rx="8"/>
+  <text x="480" y="90" text-anchor="middle" font-size="11" fill="#8b949e">INGESTION LAYER</text>
+
+  <!-- Email Telemetry -->
+  <rect x="60" y="98" width="140" height="56" fill="#1f3a5f" stroke="#58a6ff" stroke-width="1.5" rx="6"/>
+  <text x="130" y="121" text-anchor="middle" fill="#c9d1d9" font-weight="bold">Email Telemetry</text>
+  <text x="130" y="138" text-anchor="middle" fill="#8b949e" font-size="11">SMTP / O365 / GWS</text>
+
+  <!-- OAuth Events -->
+  <rect x="230" y="98" width="140" height="56" fill="#1f3a5f" stroke="#58a6ff" stroke-width="1.5" rx="6"/>
+  <text x="300" y="121" text-anchor="middle" fill="#c9d1d9" font-weight="bold">OAuth Events</text>
+  <text x="300" y="138" text-anchor="middle" fill="#8b949e" font-size="11">Azure AD / Okta</text>
+
+  <!-- Identity Logs -->
+  <rect x="400" y="98" width="140" height="56" fill="#1f3a5f" stroke="#58a6ff" stroke-width="1.5" rx="6"/>
+  <text x="470" y="121" text-anchor="middle" fill="#c9d1d9" font-weight="bold">Identity Logs</text>
+  <text x="470" y="138" text-anchor="middle" fill="#8b949e" font-size="11">SIEM / LDAP</text>
+
+  <!-- Network Flows -->
+  <rect x="570" y="98" width="140" height="56" fill="#1f3a5f" stroke="#58a6ff" stroke-width="1.5" rx="6"/>
+  <text x="640" y="121" text-anchor="middle" fill="#c9d1d9" font-weight="bold">Network Flows</text>
+  <text x="640" y="138" text-anchor="middle" fill="#8b949e" font-size="11">NetFlow / EDR</text>
+
+  <!-- Threat Intel Feeds -->
+  <rect x="740" y="98" width="160" height="56" fill="#1f3a5f" stroke="#58a6ff" stroke-width="1.5" rx="6"/>
+  <text x="820" y="121" text-anchor="middle" fill="#c9d1d9" font-weight="bold">Threat Intel Feeds</text>
+  <text x="820" y="138" text-anchor="middle" fill="#8b949e" font-size="11">MISP / STIX / TAXII</text>
+
+  <!-- ── Row 1 → Row 2 arrows ── -->
+  <line x1="130" y1="154" x2="130" y2="188" stroke="#30363d" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="300" y1="154" x2="300" y2="188" stroke="#30363d" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="470" y1="154" x2="470" y2="188" stroke="#30363d" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="640" y1="154" x2="640" y2="188" stroke="#30363d" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="820" y1="154" x2="820" y2="188" stroke="#30363d" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ── Row 2: API Service ── -->
+  <rect x="30" y="188" width="900" height="80" fill="#161b22" stroke="#30363d" stroke-width="1" rx="8"/>
+  <text x="480" y="207" text-anchor="middle" font-size="11" fill="#8b949e">API SERVICE LAYER</text>
+  <rect x="200" y="215" width="560" height="42" fill="#1a2e1a" stroke="#3fb950" stroke-width="1.5" rx="6"/>
+  <text x="480" y="235" text-anchor="middle" fill="#3fb950" font-weight="bold">FastAPI – /api/v1</text>
+  <text x="480" y="250" text-anchor="middle" fill="#8b949e" font-size="11">URL Analysis · OAuth Analysis · Identity Analysis · Health · Webhooks</text>
+
+  <!-- API → Worker arrow -->
+  <line x1="480" y1="268" x2="480" y2="298" stroke="#3fb950" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+
+  <!-- ── Row 3: Worker + AI + Graph ── -->
+  <rect x="30" y="298" width="900" height="130" fill="#161b22" stroke="#30363d" stroke-width="1" rx="8"/>
+  <text x="480" y="318" text-anchor="middle" font-size="11" fill="#8b949e">CORE PROCESSING LAYER</text>
+
+  <!-- Worker Service -->
+  <rect x="50" y="326" width="210" height="86" fill="#1f1a3a" stroke="#a371f7" stroke-width="1.5" rx="6"/>
+  <text x="155" y="347" text-anchor="middle" fill="#a371f7" font-weight="bold">Worker Service</text>
+  <text x="155" y="364" text-anchor="middle" fill="#8b949e" font-size="11">Celery + Redis</text>
+  <text x="155" y="379" text-anchor="middle" fill="#8b949e" font-size="11">Async task queue</text>
+  <text x="155" y="394" text-anchor="middle" fill="#8b949e" font-size="11">Rule deployment</text>
+
+  <!-- Autonomous AI -->
+  <rect x="290" y="326" width="380" height="86" fill="#1f2e1a" stroke="#f78166" stroke-width="1.5" rx="6"/>
+  <text x="480" y="347" text-anchor="middle" fill="#f78166" font-weight="bold">Autonomous AI Engine</text>
+  <text x="480" y="364" text-anchor="middle" fill="#8b949e" font-size="11">Predictive Threat Detection · Rule Generation</text>
+  <text x="480" y="379" text-anchor="middle" fill="#8b949e" font-size="11">Feedback Learning · Anomaly Scoring</text>
+  <text x="480" y="394" text-anchor="middle" fill="#8b949e" font-size="11">MITRE ATT&amp;CK Mapping · Risk Thresholds</text>
+
+  <!-- Global Threat Graph -->
+  <rect x="700" y="326" width="210" height="86" fill="#1a2e2e" stroke="#39d353" stroke-width="1.5" rx="6"/>
+  <text x="805" y="347" text-anchor="middle" fill="#39d353" font-weight="bold">Global Threat Graph</text>
+  <text x="805" y="364" text-anchor="middle" fill="#8b949e" font-size="11">Neo4j / Graph DB</text>
+  <text x="805" y="379" text-anchor="middle" fill="#8b949e" font-size="11">Domains · IPs · Apps</text>
+  <text x="805" y="394" text-anchor="middle" fill="#8b949e" font-size="11">Cross-tenant intel</text>
+
+  <!-- Lateral arrows in processing layer -->
+  <line x1="260" y1="369" x2="290" y2="369" stroke="#30363d" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="670" y1="369" x2="700" y2="369" stroke="#30363d" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ── Row 3 → Row 4 arrows ── -->
+  <line x1="155" y1="428" x2="155" y2="460" stroke="#30363d" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="480" y1="428" x2="480" y2="460" stroke="#30363d" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="805" y1="428" x2="805" y2="460" stroke="#30363d" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ── Row 4: Storage Layer ── -->
+  <rect x="30" y="460" width="900" height="80" fill="#161b22" stroke="#30363d" stroke-width="1" rx="8"/>
+  <text x="480" y="478" text-anchor="middle" font-size="11" fill="#8b949e">STORAGE LAYER</text>
+
+  <!-- PostgreSQL -->
+  <rect x="60" y="487" width="180" height="42" fill="#0d2137" stroke="#58a6ff" stroke-width="1.5" rx="6"/>
+  <text x="150" y="506" text-anchor="middle" fill="#58a6ff" font-weight="bold">PostgreSQL</text>
+  <text x="150" y="521" text-anchor="middle" fill="#8b949e" font-size="11">Tenants · Rules · Events</text>
+
+  <!-- Redis -->
+  <rect x="270" y="487" width="180" height="42" fill="#2e1a1a" stroke="#f78166" stroke-width="1.5" rx="6"/>
+  <text x="360" y="506" text-anchor="middle" fill="#f78166" font-weight="bold">Redis</text>
+  <text x="360" y="521" text-anchor="middle" fill="#8b949e" font-size="11">Cache · Task queue</text>
+
+  <!-- Elasticsearch -->
+  <rect x="480" y="487" width="200" height="42" fill="#1a2e1a" stroke="#3fb950" stroke-width="1.5" rx="6"/>
+  <text x="580" y="506" text-anchor="middle" fill="#3fb950" font-weight="bold">Elasticsearch</text>
+  <text x="580" y="521" text-anchor="middle" fill="#8b949e" font-size="11">Log search &amp; analytics</text>
+
+  <!-- S3 / Object Storage -->
+  <rect x="710" y="487" width="200" height="42" fill="#1a2e2e" stroke="#39d353" stroke-width="1.5" rx="6"/>
+  <text x="810" y="506" text-anchor="middle" fill="#39d353" font-weight="bold">S3 / Object Storage</text>
+  <text x="810" y="521" text-anchor="middle" fill="#8b949e" font-size="11">Artifacts · Snapshots</text>
+
+  <!-- ── Row 4 → Row 5 arrows (dashboard) ── -->
+  <line x1="480" y1="540" x2="480" y2="568" stroke="#30363d" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ── Row 5: Dashboard + CI/CD ── -->
+  <rect x="30" y="568" width="900" height="58" fill="#161b22" stroke="#30363d" stroke-width="1" rx="8"/>
+  <text x="280" y="585" text-anchor="middle" font-size="11" fill="#8b949e">PRESENTATION &amp; DEVOPS</text>
+
+  <!-- Dashboard -->
+  <rect x="50" y="590" width="500" height="30" fill="#1f1a3a" stroke="#a371f7" stroke-width="1.5" rx="6"/>
+  <text x="300" y="609" text-anchor="middle" fill="#a371f7" font-weight="bold">Dashboard – Flask + React  (port 5000)</text>
+
+  <!-- CI/CD -->
+  <rect x="575" y="590" width="340" height="30" fill="#1a2e1a" stroke="#3fb950" stroke-width="1.5" rx="6"/>
+  <text x="745" y="609" text-anchor="middle" fill="#3fb950" font-weight="bold">GitHub Actions CI/CD  (build · scan · deploy)</text>
+
+  <!-- ── Arrow marker definitions ── -->
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#30363d"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#3fb950"/>
+    </marker>
+  </defs>
+
+</svg>
