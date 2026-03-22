@@ -10,7 +10,7 @@ We take security seriously. If you discover a vulnerability:
 1. Do not open a public issue.
 Security issues should be reported privately to protect users.
 2. Contact Maintainers Directly
-Send details to: [your‑security‑contact@example.com]
+Send details to: rn890432@gmail.com
 3. Provide Details
 • Steps to reproduce the vulnerability
 • Potential impact
