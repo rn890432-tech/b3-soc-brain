@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  B3 SOC Brain – Autonomous AI Flowchart
+  Shows the internal pipeline of the Autonomous AI Engine:
+  feature extraction → model inference → rule generation → feedback loop.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 860" font-family="Segoe UI, Arial, sans-serif" font-size="13">
+
+  <!-- Background -->
+  <rect width="860" height="860" fill="#0d1117" rx="12"/>
+
+  <!-- Title -->
+  <text x="430" y="36" text-anchor="middle" font-size="19" font-weight="bold" fill="#a371f7">B3 SOC Brain – Autonomous AI Engine Flowchart</text>
+  <text x="430" y="56" text-anchor="middle" font-size="11" fill="#8b949e">Feature extraction → Inference → Rule generation → Adaptive feedback</text>
+
+  <!-- ══════════════ Arrow markers ══════════════ -->
+  <defs>
+    <marker id="ap" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#a371f7"/>
+    </marker>
+    <marker id="ab" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#58a6ff"/>
+    </marker>
+    <marker id="ag" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#3fb950"/>
+    </marker>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#f85149"/>
+    </marker>
+    <marker id="ay" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#f0883e"/>
+    </marker>
+    <marker id="agr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#8b949e"/>
+    </marker>
+  </defs>
+
+  <!-- ══════════════════════════════════════════
+       BLOCK 1 – Raw Event Input
+  ══════════════════════════════════════════ -->
+  <rect x="280" y="80" width="300" height="52" fill="#1f3a5f" stroke="#58a6ff" stroke-width="2" rx="8"/>
+  <text x="430" y="103" text-anchor="middle" fill="#58a6ff" font-weight="bold">Raw Event Input</text>
+  <text x="430" y="120" text-anchor="middle" fill="#c9d1d9" font-size="11">URL · OAuth token · Login event · Network packet</text>
+
+  <line x1="430" y1="132" x2="430" y2="158" stroke="#a371f7" stroke-width="1.5" marker-end="url(#ap)"/>
+
+  <!-- ══════════════════════════════════════════
+       BLOCK 2 – Preprocessing & Feature Extraction
+  ══════════════════════════════════════════ -->
+  <rect x="255" y="158" width="350" height="68" fill="#1f2040" stroke="#a371f7" stroke-width="2" rx="8"/>
+  <text x="430" y="181" text-anchor="middle" fill="#a371f7" font-weight="bold">Preprocessing &amp; Feature Extraction</text>
+  <text x="430" y="198" text-anchor="middle" fill="#c9d1d9" font-size="11">Tokenise · Normalise · Vectorise</text>
+  <text x="430" y="214" text-anchor="middle" fill="#8b949e" font-size="11">URL lexical features · OAuth scope graph · Behavioural baseline</text>
+
+  <line x1="430" y1="226" x2="430" y2="252" stroke="#a371f7" stroke-width="1.5" marker-end="url(#ap)"/>
+
+  <!-- ══════════════════════════════════════════
+       BLOCK 3 – Multi-Model Inference  (3 parallel sub-models)
+  ══════════════════════════════════════════ -->
+  <rect x="30" y="252" width="800" height="100" fill="#161b22" stroke="#30363d" stroke-width="1" rx="8"/>
+  <text x="430" y="272" text-anchor="middle" font-size="11" fill="#8b949e">MULTI-MODEL INFERENCE</text>
+
+  <!-- Phishing Model -->
+  <rect x="50" y="280" width="220" height="60" fill="#2e1a1a" stroke="#f85149" stroke-width="1.5" rx="6"/>
+  <text x="160" y="303" text-anchor="middle" fill="#f85149" font-weight="bold">Phishing Classifier</text>
+  <text x="160" y="319" text-anchor="middle" fill="#8b949e" font-size="11">XGBoost · URL features</text>
+  <text x="160" y="334" text-anchor="middle" fill="#8b949e" font-size="11">Output: phish_score 0–1</text>
+
+  <!-- OAuth Model -->
+  <rect x="320" y="280" width="220" height="60" fill="#1f1a3a" stroke="#a371f7" stroke-width="1.5" rx="6"/>
+  <text x="430" y="303" text-anchor="middle" fill="#a371f7" font-weight="bold">OAuth Abuse Detector</text>
+  <text x="430" y="319" text-anchor="middle" fill="#8b949e" font-size="11">GNN · Permission graph</text>
+  <text x="430" y="334" text-anchor="middle" fill="#8b949e" font-size="11">Output: oauth_risk 0–1</text>
+
+  <!-- Identity Model -->
+  <rect x="590" y="280" width="220" height="60" fill="#1a2e1a" stroke="#3fb950" stroke-width="1.5" rx="6"/>
+  <text x="700" y="303" text-anchor="middle" fill="#3fb950" font-weight="bold">Identity Anomaly Detector</text>
+  <text x="700" y="319" text-anchor="middle" fill="#8b949e" font-size="11">LSTM · Behavioural seq</text>
+  <text x="700" y="334" text-anchor="middle" fill="#8b949e" font-size="11">Output: identity_risk 0–1</text>
+
+  <!-- Model outputs merge into Risk Aggregator -->
+  <line x1="160" y1="352" x2="160" y2="380" stroke="#f85149" stroke-width="1.5"/>
+  <line x1="160" y1="380" x2="430" y2="380" stroke="#f85149" stroke-width="1.5" marker-end="url(#ar)"/>
+  <line x1="430" y1="352" x2="430" y2="380" stroke="#a371f7" stroke-width="1.5" marker-end="url(#ap)"/>
+  <line x1="700" y1="352" x2="700" y2="380" stroke="#3fb950" stroke-width="1.5"/>
+  <line x1="700" y1="380" x2="430" y2="380" stroke="#3fb950" stroke-width="1.5" marker-end="url(#ag)"/>
+
+  <!-- ══════════════════════════════════════════
+       BLOCK 4 – Risk Aggregator & MITRE Mapping
+  ══════════════════════════════════════════ -->
+  <rect x="255" y="388" width="350" height="66" fill="#2a2a1a" stroke="#f0883e" stroke-width="2" rx="8"/>
+  <text x="430" y="411" text-anchor="middle" fill="#f0883e" font-weight="bold">Risk Aggregator &amp; MITRE Mapping</text>
+  <text x="430" y="428" text-anchor="middle" fill="#c9d1d9" font-size="11">Weighted ensemble score · Confidence interval</text>
+  <text x="430" y="444" text-anchor="middle" fill="#8b949e" font-size="11">Map to ATT&amp;CK tactic/technique · Severity label</text>
+
+  <line x1="430" y1="454" x2="430" y2="480" stroke="#f0883e" stroke-width="1.5" marker-end="url(#ay)"/>
+
+  <!-- ══════════════════════════════════════════
+       BLOCK 5 – Decision Gate (diamond)
+  ══════════════════════════════════════════ -->
+  <polygon points="430,480 530,524 430,568 330,524" fill="#1a1a2e" stroke="#f0883e" stroke-width="2"/>
+  <text x="430" y="520" text-anchor="middle" fill="#f0883e" font-weight="bold">Risk ≥ Threshold?</text>
+  <text x="430" y="537" text-anchor="middle" fill="#8b949e" font-size="11">per-tenant config</text>
+
+  <!-- YES → Rule Generation -->
+  <line x1="530" y1="524" x2="640" y2="524" stroke="#f85149" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text x="585" y="516" text-anchor="middle" fill="#f85149" font-size="11">YES</text>
+
+  <!-- NO → Feedback path -->
+  <line x1="330" y1="524" x2="200" y2="524" stroke="#3fb950" stroke-width="1.5" marker-end="url(#ag)"/>
+  <text x="265" y="516" text-anchor="middle" fill="#3fb950" font-size="11">NO</text>
+
+  <!-- ══════════════════════════════════════════
+       BLOCK 6a (right) – Autonomous Rule Generation
+  ══════════════════════════════════════════ -->
+  <rect x="640" y="496" width="190" height="56" fill="#2e1a1a" stroke="#f85149" stroke-width="2" rx="8"/>
+  <text x="735" y="519" text-anchor="middle" fill="#f85149" font-weight="bold">Rule Generation</text>
+  <text x="735" y="536" text-anchor="middle" fill="#8b949e" font-size="11">Sigma · YARA · Firewall</text>
+
+  <line x1="735" y1="552" x2="735" y2="620" stroke="#f85149" stroke-width="1.5" marker-end="url(#ar)"/>
+
+  <!-- ══════════════════════════════════════════
+       BLOCK 7 – Rule Validation & Deployment
+  ══════════════════════════════════════════ -->
+  <rect x="580" y="620" width="310" height="52" fill="#1a2e1a" stroke="#39d353" stroke-width="2" rx="8"/>
+  <text x="735" y="643" text-anchor="middle" fill="#39d353" font-weight="bold">Rule Validation &amp; Deployment</text>
+  <text x="735" y="660" text-anchor="middle" fill="#c9d1d9" font-size="11">Dry-run · A/B test · Push to endpoint/gateway</text>
+
+  <!-- Rule Deployment → Feedback loop -->
+  <line x1="580" y1="646" x2="430" y2="646" stroke="#39d353" stroke-width="1.5" marker-end="url(#ag)"/>
+
+  <!-- ══════════════════════════════════════════
+       BLOCK 6b (left) – Feedback / Benign log
+  ══════════════════════════════════════════ -->
+  <rect x="30" y="496" width="170" height="56" fill="#1a2e1a" stroke="#3fb950" stroke-width="2" rx="8"/>
+  <text x="115" y="519" text-anchor="middle" fill="#3fb950" font-weight="bold">Log Benign Event</text>
+  <text x="115" y="536" text-anchor="middle" fill="#8b949e" font-size="11">Enrich training set</text>
+
+  <line x1="115" y1="552" x2="115" y2="700" stroke="#3fb950" stroke-width="1.5"/>
+  <line x1="115" y1="700" x2="430" y2="700" stroke="#3fb950" stroke-width="1.5" marker-end="url(#ag)"/>
+
+  <!-- ══════════════════════════════════════════
+       BLOCK 8 – Adaptive Feedback Learning
+  ══════════════════════════════════════════ -->
+  <rect x="255" y="620" width="290" height="66" fill="#1f2040" stroke="#a371f7" stroke-width="2" rx="8"/>
+  <text x="400" y="644" text-anchor="middle" fill="#a371f7" font-weight="bold">Adaptive Feedback Learning</text>
+  <text x="400" y="661" text-anchor="middle" fill="#c9d1d9" font-size="11">Analyst corrections · Rule outcomes</text>
+  <text x="400" y="677" text-anchor="middle" fill="#8b949e" font-size="11">Retrain model weights · Adjust thresholds</text>
+
+  <!-- benign log → feedback block -->
+  <line x1="115" y1="700" x2="255" y2="653" stroke="#3fb950" stroke-width="1.5" marker-end="url(#ag)"/>
+
+  <!-- ══════════════════════════════════════════
+       BLOCK 9 – Global Threat Graph Update
+  ══════════════════════════════════════════ -->
+  <rect x="255" y="718" width="350" height="52" fill="#1a2e2e" stroke="#39d353" stroke-width="2" rx="8"/>
+  <text x="430" y="741" text-anchor="middle" fill="#39d353" font-weight="bold">Global Threat Graph Update</text>
+  <text x="430" y="758" text-anchor="middle" fill="#c9d1d9" font-size="11">Add IOCs · Update cross-tenant correlations</text>
+
+  <!-- Feedback → Threat Graph -->
+  <line x1="400" y1="686" x2="400" y2="718" stroke="#a371f7" stroke-width="1.5" marker-end="url(#ap)"/>
+
+  <!-- Threat Graph → back to Preprocessing (feedback loop indicator) -->
+  <line x1="255" y1="744" x2="70" y2="744" stroke="#8b949e" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <line x1="70" y1="744" x2="70" y2="185" stroke="#8b949e" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <line x1="70" y1="185" x2="255" y2="185" stroke="#8b949e" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#agr)"/>
+  <text x="42" y="480" text-anchor="middle" fill="#8b949e" font-size="10" transform="rotate(-90 42 480)">Continuous retraining loop</text>
+
+  <!-- ══════════════════════════════════════════
+       Legend
+  ══════════════════════════════════════════ -->
+  <rect x="560" y="718" width="280" height="90" fill="#161b22" stroke="#30363d" stroke-width="1" rx="6"/>
+  <text x="700" y="737" text-anchor="middle" fill="#8b949e" font-size="11" font-weight="bold">Legend</text>
+  <line x1="575" y1="750" x2="610" y2="750" stroke="#f85149" stroke-width="2" marker-end="url(#ar)"/>
+  <text x="618" y="754" fill="#f85149" font-size="11">Threat path</text>
+  <line x1="575" y1="768" x2="610" y2="768" stroke="#3fb950" stroke-width="2" marker-end="url(#ag)"/>
+  <text x="618" y="772" fill="#3fb950" font-size="11">Benign / feedback path</text>
+  <line x1="575" y1="786" x2="610" y2="786" stroke="#a371f7" stroke-width="2" marker-end="url(#ap)"/>
+  <text x="618" y="790" fill="#a371f7" font-size="11">AI processing path</text>
+  <line x1="575" y1="800" x2="610" y2="800" stroke="#8b949e" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#agr)"/>
+  <text x="618" y="804" fill="#8b949e" font-size="11">Retraining loop</text>
+
+</svg>
